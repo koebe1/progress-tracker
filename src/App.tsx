@@ -44,8 +44,16 @@ const App: React.FC = () => {
       ) : null}
 
       <nav style={{ marginTop: "10px" }}>
-        <button onClick={() => navigate("/stories")}>Stories</button>
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <button
+          className="btn btn-dark"
+          style={{ margin: "0 5px" }}
+          onClick={() => navigate("/stories")}
+        >
+          Stories
+        </button>
+        <button className="btn btn-dark" onClick={() => navigate("/dashboard")}>
+          Dashboard
+        </button>
       </nav>
       <Outlet />
     </div>
