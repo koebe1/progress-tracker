@@ -24,14 +24,15 @@ import React, { useState } from "react";
 export const Stories = ({ user }) => {
   const [stories, setStories] = useState(null);
 
-  console.log(user);
-
   return (
-    <div className="content-container">
-      {/* no story exists */}
-      {user && !stories ? (
-        <div className="flex-center-column glass-overlay">story is empty</div>
-      ) : null}
+    <div className="">
+      
+      <div className="content-container">
+        {/* no story exists */}
+        {user && !stories ? (
+          <div className="flex-center-column glass-overlay">story is empty</div>
+        ) : null}
+      </div>
     </div>
   );
 };

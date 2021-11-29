@@ -13,7 +13,7 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
   userName,
 }) => {
   return (
-    <div className="flex-center-column glass-overlay ">
+    <div className="flex-center-column glass-overlay " style={{ top: "0px" }}>
       <div style={{ width: "70%" }}>
         <p style={{ textAlign: "center" }}>
           Hi there and welcome to <strong>Stories</strong> 🙌!
@@ -31,13 +31,6 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
       <form onSubmit={handleNameSubmit}>
         <input
           className="input"
-          // style={{
-          //   padding: "4px",
-          //   outline: "none",
-          //   border: "none",
-          //   borderRadius: "4px",
-          //   boxShadow: "rgba(99, 99, 99, 0.15) 0px 2px 8px 0px",
-          // }}
           onChange={handleNameChange}
           value={userName}
           placeholder="Enter your name"

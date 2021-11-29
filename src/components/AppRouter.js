@@ -48,9 +48,9 @@ const AppRouter = () => {
           }
         >
           {/* STORIES */}
-          <Route path="/stories" element={<Stories name={user} />} />
+          <Route path="/stories" element={<Stories user={user} />} />
           {/* DASHBOARD */}
-          <Route path="/dashboard" element={<Dashboard name={user} />} />
+          <Route path="/dashboard" element={<Dashboard user={user} />} />
         </Route>
         <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
       </Routes>

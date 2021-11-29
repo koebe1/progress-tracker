@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header";
 import { UserNameForm } from "./components/UserNameForm";
@@ -20,16 +20,25 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
       ) : null}
 
       <nav style={{ marginTop: "10px" }}>
-        <button
-          className="btn btn-dark"
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "btn btn-primary" : "btn btn-dark"
+          }
+          // className="btn btn-secondary"
+
           style={{ margin: "0 5px" }}
-          onClick={() => navigate("/stories")}
+          to="/stories"
         >
           Stories
-        </button>
-        <button className="btn btn-dark" onClick={() => navigate("/dashboard")}>
+        </NavLink>
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive ? "btn btn-primary" : "btn btn-dark"
+          }
+        >
           Dashboard
-        </button>
+        </NavLink>
       </nav>
       <Outlet />
     </div>
