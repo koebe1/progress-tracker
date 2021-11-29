@@ -22,10 +22,10 @@ const App: React.FC = () => {
   }, []);
 
   // EVENT HANDLERS
-  const handleNameChange = (event: any) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
   };
-  const handleNameSubmit = (event: any) => {
+  const handleNameSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setUser(userName);
     localStorage.setItem("user", userName);

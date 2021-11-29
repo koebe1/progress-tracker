@@ -1,5 +1,6 @@
 import React from "react";
 
+// NEEDS REFACTORING
 interface UserNameFormProps {
   handleNameSubmit: any;
   handleNameChange: any;
