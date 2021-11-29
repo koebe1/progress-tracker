@@ -1,35 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header";
 import { UserNameForm } from "./components/UserNameForm";
 
-const App: React.FC = () => {
-  // STATE
-  const [user, setUser] = useState("");
-  const [userName, setUserName] = useState("");
-
+const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
   const navigate = useNavigate();
-
-  // GET INIT STATE
-  useEffect(() => {
-    if (localStorage.getItem("user") !== null) {
-      // ! tells typescript value is not going to be null
-      // ---> non null assertion
-      const savedUser = localStorage.getItem("user")!;
-      setUser(savedUser);
-    }
-  }, []);
-
-  // EVENT HANDLERS
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
-  };
-  const handleNameSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setUser(userName);
-    localStorage.setItem("user", userName);
-  };
 
   return (
     <div>

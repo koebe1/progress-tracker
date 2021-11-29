@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 
-export const Stories: React.FC = () => {
+// story data structure
+// const stories = {
+//   storyOne: {
+//     subStories: ["subStoryOne", "subStoryTwo"]
+//   },
+//   storyTwo: {
+//     subStories: ["subStoryOne", "subStoryTwo"]
+//   }
+// }
 
-  const [story, setStory] = useState([]);
+// set new story
+// setStories((prevState) => ({
+//   ...prevState,
+//   storyOne: {
+//     subStories: [],
+//   },
+// }));
 
-  
+// set new sub story
+// setStories(prev => prev.storyOne.subStories.push("subStoryOne"))
+
+export const Stories = ({ user }) => {
+  const [stories, setStories] = useState(null);
+
+  console.log(user);
+
   return (
-    <div
-      style={{
-        height: "100px",
-        marginLeft: "8px",
-        marginTop: "8px",
-        backgroundColor: "#FAFAFA",
-        borderRadius: "10px",
-        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-      }}
-    >
-
-
-      
+    <div className="content-container">
+      {/* no story exists */}
+      {user && !stories ? (
+        <div className="flex-center-column glass-overlay">story is empty</div>
+      ) : null}
     </div>
   );
 };

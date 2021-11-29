@@ -1,22 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Stories } from "./components/Stories";
-import { Dashboard } from "./components/Dashboard";
+import { BrowserRouter } from "react-router-dom";
+
+import AppRouter from "./components/AppRouter";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/stories" element={<Stories />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-        <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
-      </Routes>
+      <AppRouter />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

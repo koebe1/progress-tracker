@@ -13,20 +13,7 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
   userName,
 }) => {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        backgroundColor: "rgba(255, 255, 255, .15)",
-        backdropFilter: "blur(5px)",
-      }}
-    >
+    <div className="flex-center-column glass-overlay ">
       <div style={{ width: "70%" }}>
         <p style={{ textAlign: "center" }}>
           Hi there and welcome to <strong>Stories</strong> 🙌!
@@ -38,7 +25,7 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
           daily tasks ✔ .
           <br />
           <br />
-          Just enter your name and let's go!
+          Just type in your name and hit enter!
         </p>
       </div>
       <form onSubmit={handleNameSubmit}>
