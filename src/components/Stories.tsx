@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Stories: React.FC = () => {
+
+  const [story, setStory] = useState([]);
+
+  
   return (
     <div
       style={{
@@ -12,7 +16,9 @@ export const Stories: React.FC = () => {
         boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
     >
-      <h5>stories works!</h5>
+
+
+      
     </div>
   );
 };
