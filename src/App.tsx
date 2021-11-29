@@ -22,11 +22,11 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
       <nav style={{ marginTop: "10px" }}>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "btn btn-primary" : "btn btn-dark"
+            isActive ? "btn btn-dark btn-sm disabled" : "btn btn-sm btn-dark"
           }
           // className="btn btn-secondary"
 
-          style={{ margin: "0 5px" }}
+          style={{ margin: "0 5px", boxShadow: "none" }}
           to="/stories"
         >
           Stories
@@ -34,8 +34,9 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
-            isActive ? "btn btn-primary" : "btn btn-dark"
+            isActive ? "btn btn-dark btn-sm disabled" : "btn btn-sm btn-dark"
           }
+          style={{ boxShadow: "none" }}
         >
           Dashboard
         </NavLink>

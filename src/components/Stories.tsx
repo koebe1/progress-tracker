@@ -25,7 +25,9 @@ export const Stories = ({ user }) => {
   const [stories, setStories] = useState(null);
 
   return (
-    <div className="">
+    <div>
+      <input type="text" placeholder="add story" />
+      <button>add </button>
       
       <div className="content-container">
         {/* no story exists */}

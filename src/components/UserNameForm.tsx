@@ -13,7 +13,10 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
   userName,
 }) => {
   return (
-    <div className="flex-center-column glass-overlay " style={{ top: "0px" }}>
+    <div
+      className="flex-center-column glass-overlay "
+      style={{ top: "0px", height: "100vh", width: "100vw" }}
+    >
       <div style={{ width: "70%" }}>
         <p style={{ textAlign: "center" }}>
           Hi there and welcome to <strong>Stories</strong> 🙌!
