@@ -47,6 +47,11 @@ export const Stories = ({ user }) => {
   };
 
   // SIDE EFFECTS
+  // get initial story state
+  useEffect(() => {
+    const savedStories = JSON.parse(localStorage.getItem("stories"));
+    setStories(savedStories);
+  }, []);
   // save stories to local storage
   useEffect(() => {
     localStorage.setItem("stories", JSON.stringify(stories));
