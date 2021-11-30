@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Redirect } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import App from "../App";
 
 import { Dashboard } from "./Dashboard";
@@ -44,7 +44,6 @@ const AppRouter = () => {
               userName={userName}
               handleNameChange={handleNameChange}
               handleNameSubmit={handleNameSubmit}
-              
             />
           }
         >

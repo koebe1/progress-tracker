@@ -1,12 +1,10 @@
 import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header";
 import { UserNameForm } from "./components/UserNameForm";
 
 const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
-  const navigate = useNavigate();
-
   return (
     <div>
       <Header user={user} />
