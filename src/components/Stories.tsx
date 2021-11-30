@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import StoryList from "./StoryList";
 
+// get select + options before render bc of react
+// bug when dynamically rendering options
+
 export const Stories = ({ user }) => {
   // STATE
-  const [stories, setStories] = useState(null);
+  const [stories, setStories] = useState({});
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
+  const [selectedStory, setSelectedStory] = useState("default");
 
+  console.log(selectedStory);
   // EVENT HANDLERS
   // STORY
   const handleStoryInput = (e) => {
@@ -55,7 +60,32 @@ export const Stories = ({ user }) => {
     setSubStoryInput(e.target.value);
   };
 
-  const handleSubStorySubmit = (e) => {};
+  const handleSelectedStory = (e) => {
+    setSelectedStory(e.target.value);
+  };
+
+  const storyOptions = stories
+    ? Object.keys(stories).map((story) => (
+        <option key={story} value={story}>
+          {story}
+        </option>
+      ))
+    : null;
+
+  // ADDS DUPLICATE SUBSTORIES AS OF RIGHT NOW
+  const handleSubStorySubmit = (e) => {
+    e.preventDefault();
+    if (stories && selectedStory !== "default") {
+      setStories((prev) => ({
+        ...prev,
+        [selectedStory]: {
+          done: false,
+          subStories: [...prev[selectedStory]["subStories"], subStoryInput],
+        },
+      }));
+      setSubStoryInput("");
+    }
+  };
 
   // SIDE EFFECTS
   // get initial story state
@@ -69,16 +99,11 @@ export const Stories = ({ user }) => {
   }, [stories]);
 
   // DEBUGGING
-  console.log(stories);
 
   return (
     <div>
-      <div
-        className="content-container"
-        style={{ padding: "5px", minWidth: "480px" }}
-      >
+      <div className="content-container" style={{ padding: "5px" }}>
         {/* USER INPUT */}
-
         <div className="forms" style={{ display: "flex" }}>
           {/* STORY */}
           <form onSubmit={handleStorySubmit} style={{ marginRight: "10px" }}>
@@ -103,15 +128,21 @@ export const Stories = ({ user }) => {
           <form onSubmit={handleSubStorySubmit}>
             <label style={{ marginLeft: "15px" }}>story</label>
             {/* render all stories as options for substories */}
-            <select style={{ margin: "0 5px", width: "auto" }}>
-              {stories
-                ? Object.keys(stories).map((story) => (
-                    <option key={story} value={story}>
-                      {story}
-                    </option>
-                  ))
-                : null}
+
+            <select
+              value={selectedStory}
+              placeholder="pick a story"
+              onChange={handleSelectedStory}
+              style={{ margin: "0 5px", minWidth: "40px !important" }}
+            >
+              {/* empty default value so user has to pick a option */}
+              <option value="default" disabled hidden>
+                pick a story
+              </option>
+              {/* computed options  */}
+              {storyOptions}
             </select>
+
             <input
               value={subStoryInput}
               onChange={handleSubStoryInput}
