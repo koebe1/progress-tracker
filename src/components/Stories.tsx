@@ -37,7 +37,9 @@ export const Stories = ({ user }) => {
     if (inputStory !== "") {
       setStories((prevState) => ({
         ...prevState,
+
         [inputStory]: {
+          done: false,
           subStories: [],
         },
       }));
@@ -54,6 +56,15 @@ export const Stories = ({ user }) => {
         ...prev,
       };
     });
+  };
+
+  const handleStoryCompletion = (story) => {
+    setStories((prev) => ({
+      ...prev,
+      [story]: {
+        done: !prev[story]["done"],
+      },
+    }));
   };
 
   // SIDE EFFECTS
@@ -100,7 +111,16 @@ export const Stories = ({ user }) => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <li>{story}</li>
+                  <li
+                    onClick={() => handleStoryCompletion(story)}
+                    style={
+                      stories[story]["done"]
+                        ? { textDecoration: "line-through", cursor: "pointer" }
+                        : { cursor: "pointer" }
+                    }
+                  >
+                    {story}
+                  </li>
                   <button
                     name={story}
                     onClick={handleDeleteStory}
