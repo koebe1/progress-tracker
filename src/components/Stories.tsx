@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // story data structure
 // const stories = {
@@ -41,11 +41,17 @@ export const Stories = ({ user }) => {
           subStories: [],
         },
       }));
+      // empty input field
       setInputStory("");
     }
   };
 
-  console.log(stories);
+  // SIDE EFFECTS
+  // save stories to local storage
+  useEffect(() => {
+    localStorage.setItem("stories", JSON.stringify(stories));
+  }, [stories]);
+
   return (
     <div>
       <div className="content-container" style={{ padding: "5px" }}>
@@ -66,9 +72,7 @@ export const Stories = ({ user }) => {
         </form>
         <ul>
           {stories
-            ? Object.keys(stories).map((story) => (
-                <li key={story}>{story}</li>
-              ))
+            ? Object.keys(stories).map((story) => <li key={story}>{story}</li>)
             : null}
         </ul>
         {/* no story exists */}
