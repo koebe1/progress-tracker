@@ -1,50 +1,32 @@
 import React, { useEffect, useState } from "react";
-
-// story data structure
-// const stories = {
-//   storyOne: {
-//     subStories: ["subStoryOne", "subStoryTwo"]
-//   },
-//   storyTwo: {
-//     subStories: ["subStoryOne", "subStoryTwo"]
-//   }
-// }
-
-// set new story
-// setStories((prevState) => ({
-//   ...prevState,
-//   storyOne: {
-//     subStories: [],
-//   },
-// }));
-
-// set new sub story
-// setStories(prev => prev.storyOne.subStories.push("subStoryOne"))
+import StoryList from "./StoryList";
 
 export const Stories = ({ user }) => {
   // STATE
   const [stories, setStories] = useState(null);
-  const [inputStory, setInputStory] = useState("");
+  const [subStoryInput, setSubStoryInput] = useState("");
+  const [storyInput, setStoryInput] = useState("");
 
   // EVENT HANDLERS
-  const handleInputStory = (e) => {
-    setInputStory(e.target.value);
+  // STORY
+  const handleStoryInput = (e) => {
+    setStoryInput(e.target.value);
   };
 
   const handleStorySubmit = (e) => {
     e.preventDefault();
     // add new story with empty substory array to the story object
-    if (inputStory !== "") {
+    if (storyInput !== "") {
       setStories((prevState) => ({
         ...prevState,
 
-        [inputStory]: {
+        [storyInput]: {
           done: false,
           subStories: [],
         },
       }));
       // empty input field
-      setInputStory("");
+      setStoryInput("");
     }
   };
 
@@ -59,6 +41,7 @@ export const Stories = ({ user }) => {
   };
 
   const handleStoryCompletion = (story) => {
+    // toggle done property
     setStories((prev) => ({
       ...prev,
       [story]: {
@@ -66,6 +49,13 @@ export const Stories = ({ user }) => {
       },
     }));
   };
+
+  // SUBSTORY
+  const handleSubStoryInput = (e) => {
+    setSubStoryInput(e.target.value);
+  };
+
+  const handleSubStorySubmit = (e) => {};
 
   // SIDE EFFECTS
   // get initial story state
@@ -78,61 +68,73 @@ export const Stories = ({ user }) => {
     localStorage.setItem("stories", JSON.stringify(stories));
   }, [stories]);
 
+  // DEBUGGING
+  console.log(stories);
+
   return (
     <div>
-      <div className="content-container" style={{ padding: "5px" }}>
+      <div
+        className="content-container"
+        style={{ padding: "5px", minWidth: "480px" }}
+      >
         {/* USER INPUT */}
-        <form onSubmit={handleStorySubmit}>
-          <input
-            value={inputStory}
-            onChange={handleInputStory}
-            className="input"
-            type="text"
-            placeholder="add story"
-          />
-          <input
-            className={`btn btn-outline-dark btn-sm ${
-              !inputStory ? "disabled" : ""
-            }`}
-            style={{ boxShadow: "none" }}
-            type="submit"
-            value="add"
-          />
-        </form>
+
+        <div className="forms" style={{ display: "flex" }}>
+          {/* STORY */}
+          <form onSubmit={handleStorySubmit} style={{ marginRight: "10px" }}>
+            <input
+              value={storyInput}
+              onChange={handleStoryInput}
+              className="input"
+              type="text"
+              placeholder="add story"
+            />
+            <input
+              className={`btn btn-outline-dark btn-sm ${
+                !storyInput ? "disabled" : ""
+              }`}
+              style={{ boxShadow: "none" }}
+              type="submit"
+              value="add"
+            />
+          </form>
+
+          {/* SUBSTORY */}
+          <form onSubmit={handleSubStorySubmit}>
+            <label style={{ marginLeft: "15px" }}>story</label>
+            {/* render all stories as options for substories */}
+            <select style={{ margin: "0 5px", width: "auto" }}>
+              {stories
+                ? Object.keys(stories).map((story) => (
+                    <option key={story} value={story}>
+                      {story}
+                    </option>
+                  ))
+                : null}
+            </select>
+            <input
+              value={subStoryInput}
+              onChange={handleSubStoryInput}
+              className="input"
+              type="text"
+              placeholder="add substory"
+            />
+            <input
+              className={`btn btn-outline-dark btn-sm ${
+                !subStoryInput ? "disabled" : ""
+              }`}
+              style={{ boxShadow: "none" }}
+              type="submit"
+              value="add"
+            />
+          </form>
+        </div>
         {/* STORIES */}
-        <ul>
-          {stories
-            ? Object.keys(stories).map((story) => (
-                <div
-                  key={story}
-                  style={{
-                    width: "90px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <li
-                    onClick={() => handleStoryCompletion(story)}
-                    style={
-                      stories[story]["done"]
-                        ? { textDecoration: "line-through", cursor: "pointer" }
-                        : { cursor: "pointer" }
-                    }
-                  >
-                    {story}
-                  </li>
-                  <button
-                    name={story}
-                    onClick={handleDeleteStory}
-                    className="btn btn-sm"
-                    style={{ boxShadow: "none" }}
-                  >
-                    ❌
-                  </button>
-                </div>
-              ))
-            : null}
-        </ul>
+        <StoryList
+          stories={stories}
+          handleDeleteStory={handleDeleteStory}
+          handleStoryCompletion={handleStoryCompletion}
+        />
         {/* no story exists */}
         {/* {user && !stories ? (
           <div className="flex-center-column glass-overlay">story is empty</div>
