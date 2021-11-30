@@ -126,7 +126,6 @@ export const Stories = ({ user }) => {
 
           {/* SUBSTORY */}
           <form onSubmit={handleSubStorySubmit}>
-            <label style={{ marginLeft: "15px" }}>story</label>
             {/* render all stories as options for substories */}
 
             <select
@@ -137,7 +136,8 @@ export const Stories = ({ user }) => {
             >
               {/* empty default value so user has to pick a option */}
               <option value="default" disabled hidden>
-                pick a story
+                {" "}
+                story
               </option>
               {/* computed options  */}
               {storyOptions}
