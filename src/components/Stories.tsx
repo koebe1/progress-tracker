@@ -46,6 +46,16 @@ export const Stories = ({ user }) => {
     }
   };
 
+  const handleDeleteStory = (e) => {
+    // delete story property of the clicked list item
+    setStories((prev) => {
+      delete prev[e.target.name];
+      return {
+        ...prev,
+      };
+    });
+  };
+
   // SIDE EFFECTS
   // get initial story state
   useEffect(() => {
@@ -60,6 +70,7 @@ export const Stories = ({ user }) => {
   return (
     <div>
       <div className="content-container" style={{ padding: "5px" }}>
+        {/* USER INPUT */}
         <form onSubmit={handleStorySubmit}>
           <input
             value={inputStory}
@@ -69,15 +80,37 @@ export const Stories = ({ user }) => {
             placeholder="add story"
           />
           <input
-            className={`btn btn-outline-dark btn-sm`}
+            className={`btn btn-outline-dark btn-sm ${
+              !inputStory ? "disabled" : ""
+            }`}
             style={{ boxShadow: "none" }}
             type="submit"
             value="add"
           />
         </form>
+        {/* STORIES */}
         <ul>
           {stories
-            ? Object.keys(stories).map((story) => <li key={story}>{story}</li>)
+            ? Object.keys(stories).map((story) => (
+                <div
+                  key={story}
+                  style={{
+                    width: "90px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <li>{story}</li>
+                  <button
+                    name={story}
+                    onClick={handleDeleteStory}
+                    className="btn btn-sm"
+                    style={{ boxShadow: "none" }}
+                  >
+                    ❌
+                  </button>
+                </div>
+              ))
             : null}
         </ul>
         {/* no story exists */}
