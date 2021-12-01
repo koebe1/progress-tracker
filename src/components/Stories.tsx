@@ -33,7 +33,7 @@ export const Stories = ({ user }) => {
   };
 
   const handleDeleteStory = (e) => {
-    // if selected story gets deleted or all stories get deleted
+    // if selected story gets deleted
     // -> set selected to empty value
     if (e.target.name === selectedStory) {
       setSelectedStory("");
@@ -92,16 +92,6 @@ export const Stories = ({ user }) => {
       };
     });
   };
-
-  // const handleStoryCompletion = (story) => {
-  //   // toggle done property
-  //   setStories((prev) => ({
-  //     ...prev,
-  //     [story]: {
-  //       done: !prev[story]["done"],
-  //     },
-  //   }));
-  // };
 
   const handleSubStoryCompletion = (subStory) => {
     console.log(subStory);
@@ -194,7 +184,13 @@ export const Stories = ({ user }) => {
           </form>
         </div>
         {/* STORIES */}
-        <div className="story-container" style={{ display: "flex" }}>
+        <div
+          className="story-container"
+          style={{
+            display: "flex",
+            marginTop: "20px",
+          }}
+        >
           <StoryList
             stories={stories}
             handleDeleteStory={handleDeleteStory}
@@ -221,8 +217,7 @@ export const Stories = ({ user }) => {
   );
 };
 
-// Data Structure of stories
-
+// DATA STRUCUTRE OF STORIES
 // stories = {
 //    story1: {
 //      done: false,
