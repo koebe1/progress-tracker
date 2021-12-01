@@ -11,7 +11,6 @@ export const Stories = ({ user }) => {
   const [storyInput, setStoryInput] = useState("");
   const [selectedStory, setSelectedStory] = useState("default");
 
-  console.log(selectedStory);
   // EVENT HANDLERS
   // STORY
   const handleStoryInput = (e) => {
@@ -161,11 +160,22 @@ export const Stories = ({ user }) => {
           </form>
         </div>
         {/* STORIES */}
-        <StoryList
-          stories={stories}
-          handleDeleteStory={handleDeleteStory}
-          handleStoryCompletion={handleStoryCompletion}
-        />
+        <div className="story-container" style={{ display: "flex" }}>
+          <StoryList
+            stories={stories ? Object.keys(stories): []}
+            handleDeleteStory={handleDeleteStory}
+            handleStoryCompletion={handleStoryCompletion}
+          />
+          <StoryList
+            stories={
+              stories && selectedStory !== "default"
+                ? stories[selectedStory]["subStories"]
+                : ""
+            }
+            handleDeleteStory={handleDeleteStory}
+            handleStoryCompletion={handleStoryCompletion}
+          />
+        </div>
         {/* no story exists */}
         {/* {user && !stories ? (
           <div className="flex-center-column glass-overlay">story is empty</div>
