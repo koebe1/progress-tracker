@@ -33,6 +33,7 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
       </div>
       <form onSubmit={handleNameSubmit}>
         <input
+          style={{ width: "150px" }}
           className="input"
           onChange={handleNameChange}
           value={userName}

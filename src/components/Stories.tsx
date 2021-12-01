@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import StoryList from "./StoryList";
-
-// get select + options before render bc of react
-// bug when dynamically rendering options
+import StorySelect from "./StorySelect";
 
 export const Stories = ({ user }) => {
   // STATE
   const [stories, setStories] = useState({});
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
-  const [selectedStory, setSelectedStory] = useState("default");
+  const [selectedStory, setSelectedStory] = useState(null);
+  console.log(selectedStory);
 
   // EVENT HANDLERS
 
@@ -27,7 +26,7 @@ export const Stories = ({ user }) => {
 
         [storyInput]: {
           done: false,
-          subStories: [],
+          subStories: {},
         },
       }));
       // empty input field
@@ -60,51 +59,62 @@ export const Stories = ({ user }) => {
     setSubStoryInput(e.target.value);
   };
 
-  const handleSelectedStory = (e) => {
-    setSelectedStory(e.target.value);
-  };
-
-  const storyOptions = stories
-    ? Object.keys(stories).map((story) => (
-        <option key={story} value={story}>
-          {story}
-        </option>
-      ))
-    : null;
-
   // ADDS DUPLICATE SUBSTORIES AS OF RIGHT NOW
   const handleSubStorySubmit = (e) => {
     e.preventDefault();
-    if (stories && selectedStory !== "default") {
+    if (stories && selectedStory) {
       setStories((prev) => ({
         ...prev,
         [selectedStory]: {
           done: false,
-          subStories: [...prev[selectedStory]["subStories"], subStoryInput],
+          subStories: {
+            ...prev[selectedStory].subStories,
+            [subStoryInput]: {
+              done: false,
+            },
+          },
         },
       }));
       setSubStoryInput("");
     }
   };
 
-  const handleDeleteSubStory = (e) => {
-    setStories((prev) => ({
-      ...prev,
-      [selectedStory]: {
-        // filter substories
-        subStories: prev[selectedStory].subStories.filter(
-          (substory) => substory !== e.target.name
-        ),
-      },
-    }));
-  };
+  // const handleDeleteSubStory = (e) => {
+  //   setStories((prev) => ({
+  //     ...prev,
+  //     [selectedStory]: {
+  //       // filter substories
+  //       subStories: prev[selectedStory].subStories.filter(
+  //         (substory) => substory !== e.target.name
+  //       ),
+  //     },
+  //   }));
+  // };
+
+  // const handleStoryCompletion = (story) => {
+  //   // toggle done property
+  //   setStories((prev) => ({
+  //     ...prev,
+  //     [story]: {
+  //       done: !prev[story]["done"],
+  //     },
+  //   }));
+  // };
+
+  // const handleSubStoryCompletion = (e) => {};
 
   // SIDE EFFECTS
   // get initial story state
   useEffect(() => {
     const savedStories = JSON.parse(localStorage.getItem("stories"));
     setStories(savedStories);
+    // setSelectedStory(savedSelectedStory);
   }, []);
+  useEffect(() => {
+    const savedSelectedStory = localStorage.getItem("selectedStory");
+    setSelectedStory(savedSelectedStory);
+  }, []);
+
   // save stories to local storage
   useEffect(() => {
     localStorage.setItem("stories", JSON.stringify(stories));
@@ -130,30 +140,38 @@ export const Stories = ({ user }) => {
               className={`btn btn-outline-dark btn-sm ${
                 !storyInput ? "disabled" : ""
               }`}
-              style={{ boxShadow: "none" }}
+              style={{ boxShadow: "none", marginLeft: "5px" }}
               type="submit"
               value="add"
             />
           </form>
 
           {/* SUBSTORY */}
-          <form onSubmit={handleSubStorySubmit}>
+          <form onSubmit={handleSubStorySubmit} style={{ display: "flex" }}>
             {/* render all stories as options for substories */}
 
-            <select
+            {/* <select
               value={selectedStory}
-              placeholder="pick a story"
               onChange={handleSelectedStory}
               style={{ margin: "0 5px", minWidth: "40px !important" }}
             >
-              {/* empty default value so user has to pick a option */}
+            
               <option value="default" disabled hidden>
-                {" "}
                 story
               </option>
-              {/* computed options  */}
-              {storyOptions}
-            </select>
+              
+
+              {Object.keys(stories).map((story) => (
+                <option key={story} value={story}>
+                  {story}
+                </option>
+              ))}
+            </select> */}
+
+            <StorySelect
+              stories={stories}
+              handleSelectedStory={setSelectedStory}
+            />
 
             <input
               value={subStoryInput}
@@ -166,7 +184,7 @@ export const Stories = ({ user }) => {
               className={`btn btn-outline-dark btn-sm ${
                 !subStoryInput ? "disabled" : ""
               }`}
-              style={{ boxShadow: "none" }}
+              style={{ boxShadow: "none", marginLeft: "5px" }}
               type="submit"
               value="add"
             />
@@ -181,15 +199,15 @@ export const Stories = ({ user }) => {
           />
 
           {/* SUBSTORIES */}
-          <StoryList
+          {/* <StoryList
             stories={
-              stories && selectedStory !== "default"
-                ? stories[selectedStory]["subStories"]
-                : ""
+              selectedStory !== "default"
+                ? Object.keys(stories[selectedStory]["subStories"])
+                : []
             }
             handleDeleteStory={handleDeleteSubStory}
             handleStoryCompletion={handleStoryCompletion}
-          />
+          /> */}
         </div>
         {/* no story exists */}
         {/* {user && !stories ? (
@@ -199,3 +217,14 @@ export const Stories = ({ user }) => {
     </div>
   );
 };
+
+// Data Structure of stories
+
+// stories = {
+//    story1: {
+//      done: false,
+//      subStories: {
+//        substory1: { done: false}
+//      }
+//    }
+// }
