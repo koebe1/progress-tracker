@@ -8,10 +8,8 @@ export const Stories = ({ user }) => {
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
   const [selectedStory, setSelectedStory] = useState(null);
-  console.log(selectedStory);
 
   // EVENT HANDLERS
-
   // STORY
   const handleStoryInput = (e) => {
     setStoryInput(e.target.value);
@@ -104,12 +102,14 @@ export const Stories = ({ user }) => {
   // const handleSubStoryCompletion = (e) => {};
 
   // SIDE EFFECTS
-  // get initial story state
+  // get initial state from local storage
   useEffect(() => {
     const savedStories = JSON.parse(localStorage.getItem("stories"));
     setStories(savedStories);
     // setSelectedStory(savedSelectedStory);
   }, []);
+
+  console.log(selectedStory);
   useEffect(() => {
     const savedSelectedStory = localStorage.getItem("selectedStory");
     setSelectedStory(savedSelectedStory);
@@ -170,7 +170,9 @@ export const Stories = ({ user }) => {
 
             <StorySelect
               stories={stories}
+              selectedStory={selectedStory}
               handleSelectedStory={setSelectedStory}
+              
             />
 
             <input
