@@ -52,7 +52,10 @@ export const Stories = ({ user }) => {
     setStories((prev) => ({
       ...prev,
       [story]: {
-        done: !prev[story]["done"],
+        done: !prev[story].done,
+        subStories: {
+          ...prev[story].subStories,
+        },
       },
     }));
   };
@@ -62,7 +65,6 @@ export const Stories = ({ user }) => {
     setSubStoryInput(e.target.value);
   };
 
-  // ADDS DUPLICATE SUBSTORIES AS OF RIGHT NOW
   const handleSubStorySubmit = (e) => {
     e.preventDefault();
     if (stories && selectedStory) {
@@ -101,7 +103,22 @@ export const Stories = ({ user }) => {
   //   }));
   // };
 
-  // const handleSubStoryCompletion = (e) => {};
+  const handleSubStoryCompletion = (subStory) => {
+    console.log(subStory);
+    // toggle done property on substory
+    setStories((prev) => ({
+      ...prev,
+      [selectedStory]: {
+        ...prev[selectedStory],
+        subStories: {
+          ...prev[selectedStory].subStories,
+          [subStory]: {
+            done: !prev[selectedStory].subStories[subStory].done,
+          },
+        },
+      },
+    }));
+  };
 
   // SIDE EFFECTS
   // get initial state from local storage
@@ -192,7 +209,7 @@ export const Stories = ({ user }) => {
                 : []
             }
             handleDeleteStory={handleDeleteSubStory}
-            handleStoryCompletion={handleStoryCompletion}
+            handleStoryCompletion={handleSubStoryCompletion}
           />
         </div>
         {/* no story exists */}
