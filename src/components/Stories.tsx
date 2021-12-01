@@ -7,7 +7,7 @@ export const Stories = ({ user }) => {
   const [stories, setStories] = useState({});
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
-  const [selectedStory, setSelectedStory] = useState(null);
+  const [selectedStory, setSelectedStory] = useState("");
 
   // EVENT HANDLERS
   // STORY
@@ -33,6 +33,11 @@ export const Stories = ({ user }) => {
   };
 
   const handleDeleteStory = (e) => {
+    // if selected story gets deleted or all stories get deleted
+    // -> set selected to empty value
+    if (e.target.name === selectedStory) {
+      setSelectedStory("");
+    }
     // delete story property of the clicked list item
     setStories((prev) => {
       delete prev[e.target.name];
@@ -77,17 +82,14 @@ export const Stories = ({ user }) => {
     }
   };
 
-  // const handleDeleteSubStory = (e) => {
-  //   setStories((prev) => ({
-  //     ...prev,
-  //     [selectedStory]: {
-  //       // filter substories
-  //       subStories: prev[selectedStory].subStories.filter(
-  //         (substory) => substory !== e.target.name
-  //       ),
-  //     },
-  //   }));
-  // };
+  const handleDeleteSubStory = (e) => {
+    setStories((prev) => {
+      delete prev[selectedStory].subStories[e.target.name];
+      return {
+        ...prev,
+      };
+    });
+  };
 
   // const handleStoryCompletion = (story) => {
   //   // toggle done property
@@ -106,15 +108,16 @@ export const Stories = ({ user }) => {
   useEffect(() => {
     const savedStories = JSON.parse(localStorage.getItem("stories"));
     setStories(savedStories);
-    // setSelectedStory(savedSelectedStory);
   }, []);
 
-  console.log(selectedStory);
   useEffect(() => {
     const savedSelectedStory = localStorage.getItem("selectedStory");
     setSelectedStory(savedSelectedStory);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("selectedStory", selectedStory);
+  }, [stories, selectedStory]);
   // save stories to local storage
   useEffect(() => {
     localStorage.setItem("stories", JSON.stringify(stories));
@@ -150,29 +153,10 @@ export const Stories = ({ user }) => {
           <form onSubmit={handleSubStorySubmit} style={{ display: "flex" }}>
             {/* render all stories as options for substories */}
 
-            {/* <select
-              value={selectedStory}
-              onChange={handleSelectedStory}
-              style={{ margin: "0 5px", minWidth: "40px !important" }}
-            >
-            
-              <option value="default" disabled hidden>
-                story
-              </option>
-              
-
-              {Object.keys(stories).map((story) => (
-                <option key={story} value={story}>
-                  {story}
-                </option>
-              ))}
-            </select> */}
-
             <StorySelect
               stories={stories}
               selectedStory={selectedStory}
               handleSelectedStory={setSelectedStory}
-              
             />
 
             <input
@@ -195,21 +179,21 @@ export const Stories = ({ user }) => {
         {/* STORIES */}
         <div className="story-container" style={{ display: "flex" }}>
           <StoryList
-            stories={stories ? Object.keys(stories) : []}
+            stories={stories}
             handleDeleteStory={handleDeleteStory}
             handleStoryCompletion={handleStoryCompletion}
           />
 
           {/* SUBSTORIES */}
-          {/* <StoryList
+          <StoryList
             stories={
-              selectedStory !== "default"
-                ? Object.keys(stories[selectedStory]["subStories"])
+              stories && selectedStory.length > 0
+                ? stories[selectedStory].subStories
                 : []
             }
             handleDeleteStory={handleDeleteSubStory}
             handleStoryCompletion={handleStoryCompletion}
-          /> */}
+          />
         </div>
         {/* no story exists */}
         {/* {user && !stories ? (
