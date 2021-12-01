@@ -12,6 +12,7 @@ export const Stories = ({ user }) => {
   const [selectedStory, setSelectedStory] = useState("default");
 
   // EVENT HANDLERS
+
   // STORY
   const handleStoryInput = (e) => {
     setStoryInput(e.target.value);
@@ -84,6 +85,18 @@ export const Stories = ({ user }) => {
       }));
       setSubStoryInput("");
     }
+  };
+
+  const handleDeleteSubStory = (e) => {
+    setStories((prev) => ({
+      ...prev,
+      [selectedStory]: {
+        // filter substories
+        subStories: prev[selectedStory].subStories.filter(
+          (substory) => substory !== e.target.name
+        ),
+      },
+    }));
   };
 
   // SIDE EFFECTS
@@ -162,17 +175,19 @@ export const Stories = ({ user }) => {
         {/* STORIES */}
         <div className="story-container" style={{ display: "flex" }}>
           <StoryList
-            stories={stories ? Object.keys(stories): []}
+            stories={stories ? Object.keys(stories) : []}
             handleDeleteStory={handleDeleteStory}
             handleStoryCompletion={handleStoryCompletion}
           />
+
+          {/* SUBSTORIES */}
           <StoryList
             stories={
               stories && selectedStory !== "default"
                 ? stories[selectedStory]["subStories"]
                 : ""
             }
-            handleDeleteStory={handleDeleteStory}
+            handleDeleteStory={handleDeleteSubStory}
             handleStoryCompletion={handleStoryCompletion}
           />
         </div>
