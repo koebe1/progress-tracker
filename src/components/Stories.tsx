@@ -133,7 +133,7 @@ export const Stories = ({ user }) => {
   // DEBUGGING
 
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <div className="content-container" style={{ padding: "5px" }}>
         {/* USER INPUT */}
         <div className="forms" style={{ display: "flex" }}>
@@ -142,9 +142,9 @@ export const Stories = ({ user }) => {
             <input
               value={storyInput}
               onChange={handleStoryInput}
-              className="input"
+              className="input "
               type="text"
-              placeholder="add story"
+              placeholder="Add a story..."
             />
             <input
               className={`btn btn-outline-dark btn-sm ${
@@ -171,7 +171,7 @@ export const Stories = ({ user }) => {
               onChange={handleSubStoryInput}
               className="input"
               type="text"
-              placeholder="add substory"
+              placeholder="Add a substory..."
             />
             <input
               className={`btn btn-outline-dark btn-sm ${

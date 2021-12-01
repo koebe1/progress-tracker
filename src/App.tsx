@@ -6,7 +6,7 @@ import { UserNameForm } from "./components/UserNameForm";
 
 const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
   return (
-    <div>
+    <div style={{ backgroundColor: "#fafafa" }}>
       <Header user={user} />
       {/* show name form if there is no user yet */}
       {!user ? (
