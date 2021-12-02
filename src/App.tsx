@@ -28,8 +28,8 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
             <NavLink
               className={({ isActive }) =>
                 isActive
-                  ? "btn btn-outline-secondary  disabled"
-                  : "btn  btn-outline-secondary"
+                  ? "btn btn-outline-secondary  disabled nav-button"
+                  : "btn  btn-outline-dark nav-button"
               }
               // className="btn btn-secondary"
 
@@ -46,8 +46,8 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
               to="/dashboard"
               className={({ isActive }) =>
                 isActive
-                  ? "btn btn-outline-secondary  disabled"
-                  : "btn  btn-outline-secondary"
+                  ? "btn btn-outline-secondary disabled nav-button"
+                  : "btn  btn-outline-dark nav-button"
               }
               style={{ boxShadow: "none", borderRadius: "4px" }}
             >
