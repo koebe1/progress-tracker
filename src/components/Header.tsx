@@ -10,8 +10,6 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
       <header
         className=""
         style={{
-          // borderBottom: "1px solid #d9d9d9",
-          // borderImage: "linear-gradient(to left, #d9d9d9, #f6f2f2) 100",
           display: "flex",
           justifyContent: "flex-start",
         }}

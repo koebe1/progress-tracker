@@ -138,7 +138,7 @@ export const Stories = ({ user }) => {
 
   return (
     <div>
-      <div className="content-container" style={{ padding: "5px" }}>
+      <div className="content-container" style={{ padding: "10px" }}>
         {/* USER INPUT */}
         <div className="forms" style={{ display: "flex" }}>
           {/* STORY */}
@@ -183,38 +183,30 @@ export const Stories = ({ user }) => {
             marginTop: "20px",
           }}
         >
-          <StoryList
-            stories={stories}
-            handleDeleteStory={handleDeleteStory}
-            handleStoryCompletion={handleStoryCompletion}
-          />
+          <div style={{ width: "31.5%" }}>
+            <StoryList
+              stories={stories}
+              handleDeleteStory={handleDeleteStory}
+              handleStoryCompletion={handleStoryCompletion}
+              subStory={false}
+            />
+          </div>
 
           {/* SUBSTORIES */}
-          <StoryList
-            stories={
-              Object.keys(stories).length > 0 && selectedStory.length > 0
-                ? stories[selectedStory].subStories
-                : []
-            }
-            handleDeleteStory={handleDeleteSubStory}
-            handleStoryCompletion={handleSubStoryCompletion}
-          />
+          <div style={{ width: "82.5%" }}>
+            <StoryList
+              stories={
+                Object.keys(stories).length > 0 && selectedStory.length > 0
+                  ? stories[selectedStory].subStories
+                  : []
+              }
+              handleDeleteStory={handleDeleteSubStory}
+              handleStoryCompletion={handleSubStoryCompletion}
+              subStory={true}
+            />
+          </div>
         </div>
-        {/* no story exists */}
-        {/* {user && !stories ? (
-          <div className="flex-center-column glass-overlay">story is empty</div>
-        ) : null} */}
       </div>
     </div>
   );
 };
-
-// DATA STRUCUTRE OF STORIES
-// stories = {
-//    story1: {
-//      done: false,
-//      subStories: {
-//        substory1: { done: false}
-//      }
-//    }
-// }
