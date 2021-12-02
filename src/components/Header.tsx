@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "35px" }}
       >
-        <h3>Hi {user}!</h3>
+        <h3 style={{ fontSize: "20px", fontWeight: "800" }}>Hi {user}!</h3>
       </div>
     </div>
   );

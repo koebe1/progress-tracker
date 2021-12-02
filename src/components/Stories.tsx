@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import InputGroup from "./InputGroup";
 import StoryList from "./StoryList";
 import StorySelect from "./StorySelect";
 
@@ -137,26 +138,24 @@ export const Stories = ({ user }) => {
         {/* USER INPUT */}
         <div className="forms" style={{ display: "flex" }}>
           {/* STORY */}
-          <form onSubmit={handleStorySubmit} style={{ marginRight: "10px" }}>
-            <input
-              value={storyInput}
-              onChange={handleStoryInput}
-              className="input "
-              type="text"
-              placeholder="Add a story..."
-            />
-            <input
-              className={`btn btn-outline-dark btn-sm ${
-                !storyInput ? "disabled" : ""
-              }`}
-              style={{ boxShadow: "none", marginLeft: "5px" }}
-              type="submit"
-              value="add"
+          <form
+            onSubmit={handleStorySubmit}
+            style={{
+              marginRight: "40px",
+            }}
+          >
+            <InputGroup
+              storyInput={storyInput}
+              handleStoryInput={handleStoryInput}
+              placeholder={"Add a story..."}
             />
           </form>
 
           {/* SUBSTORY */}
-          <form onSubmit={handleSubStorySubmit} style={{ display: "flex" }}>
+          <form
+            onSubmit={handleSubStorySubmit}
+            style={{ display: "flex", alignItems: "center" }}
+          >
             {/* render all stories as options for substories */}
 
             <StorySelect
@@ -165,20 +164,10 @@ export const Stories = ({ user }) => {
               handleSelectedStory={setSelectedStory}
             />
 
-            <input
-              value={subStoryInput}
-              onChange={handleSubStoryInput}
-              className="input"
-              type="text"
-              placeholder="Add a substory..."
-            />
-            <input
-              className={`btn btn-outline-dark btn-sm ${
-                !subStoryInput ? "disabled" : ""
-              }`}
-              style={{ boxShadow: "none", marginLeft: "5px" }}
-              type="submit"
-              value="add"
+            <InputGroup
+              storyInput={subStoryInput}
+              handleStoryInput={handleSubStoryInput}
+              placeholder={"Add a substory..."}
             />
           </form>
         </div>
