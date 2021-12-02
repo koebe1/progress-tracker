@@ -67,7 +67,7 @@ export const Stories = ({ user }) => {
 
   const handleSubStorySubmit = (e) => {
     e.preventDefault();
-    if (stories && selectedStory) {
+    if (Object.keys(stories).length > 0 && selectedStory.length > 0) {
       setStories((prev) => ({
         ...prev,
         [selectedStory]: {
@@ -94,7 +94,6 @@ export const Stories = ({ user }) => {
   };
 
   const handleSubStoryCompletion = (subStory) => {
-    console.log(subStory);
     // toggle done property on substory
     setStories((prev) => ({
       ...prev,
@@ -200,7 +199,7 @@ export const Stories = ({ user }) => {
           {/* SUBSTORIES */}
           <StoryList
             stories={
-              stories && selectedStory.length > 0
+              Object.keys(stories).length > 0 && selectedStory.length > 0
                 ? stories[selectedStory].subStories
                 : []
             }

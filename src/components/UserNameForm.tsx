@@ -18,8 +18,9 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
       style={{ top: "0px", height: "100vh", width: "100vw" }}
     >
       <div style={{ width: "70%" }}>
-        <p style={{ textAlign: "center" }}>
-          Hi there and welcome to <strong>Stories</strong> 🙌!
+        <p style={{ textAlign: "center", fontSize: "16px" }}>
+          Hi there and welcome to{" "}
+          <strong style={{ fontSize: "16px" }}>Stories</strong> 🙌!
           <br />
           At Stories we believe that every task or learning goal is a small part
           of your story on getting closer were you want to be in life ⛰.
@@ -33,11 +34,15 @@ export const UserNameForm: React.FC<UserNameFormProps> = ({
       </div>
       <form onSubmit={handleNameSubmit}>
         <input
-          style={{ width: "150px" }}
+          style={{
+            width: "150px",
+            fontSize: "16px",
+            textAlign: "center",
+          }}
           className="input"
           onChange={handleNameChange}
           value={userName}
-          placeholder="Enter your name"
+          placeholder="Enter your name..."
         />
       </form>
     </div>

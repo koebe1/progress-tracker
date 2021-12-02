@@ -10,15 +10,23 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
       <header
         className=""
         style={{
-          borderBottom: "1px solid lightgrey",
+          // borderBottom: "1px solid #d9d9d9",
+          // borderImage: "linear-gradient(to left, #d9d9d9, #f6f2f2) 100",
           display: "flex",
           justifyContent: "flex-start",
         }}
       >
         <h1>
-          <span className="heading gradient">Stories</span>
+          <span className="heading">Stories</span>
         </h1>
       </header>
+      {/* border div */}
+      <div
+        style={{
+          height: "1px",
+          background: "linear-gradient(to right, #d9d9d9,#ffff)",
+        }}
+      ></div>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "35px" }}
       >
