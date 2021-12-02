@@ -77,15 +77,20 @@
   border-left: 1px solid #fff;
 }
 .add-button:hover {
+  color: #6c757d;
   background-color: #fff;
   border: 1px solid #d3d3d3;
   border-left: 1px solid #fff;
   box-shadow: none;
 }
 .add-button:active {
+  color: #000;
   background-color: #fff;
   border: 1px solid #d3d3d3;
   border-left: 1px solid #fff;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 /* STORY */

@@ -68,7 +68,11 @@ export const Stories = ({ user }) => {
 
   const handleSubStorySubmit = (e) => {
     e.preventDefault();
-    if (Object.keys(stories).length > 0 && subStoryInput.length > 0) {
+    if (
+      Object.keys(stories).length > 0 &&
+      subStoryInput.length > 0 &&
+      selectedStory.length > 0
+    ) {
       setStories((prev) => ({
         ...prev,
         [selectedStory]: {
