@@ -6,7 +6,7 @@ import { UserNameForm } from "./components/UserNameForm";
 
 const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
   return (
-    <div style={{ backgroundColor: "#fafafa" }}>
+    <div>
       <Header user={user} />
       {/* show name form if there is no user yet */}
       {!user ? (
@@ -16,30 +16,43 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
           userName={userName}
         />
       ) : null}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <nav style={{ marginLeft: "25px", marginTop: "5px" }}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "btn btn-dark btn-sm disabled"
+                  : "btn btn-sm btn-dark"
+              }
+              // className="btn btn-secondary"
 
-      <nav style={{ marginTop: "10px" }}>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "btn btn-dark btn-sm disabled" : "btn btn-sm btn-dark"
-          }
-          // className="btn btn-secondary"
-
-          style={{ margin: "0 5px", boxShadow: "none" }}
-          to="/stories"
-        >
-          Stories
-        </NavLink>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "btn btn-dark btn-sm disabled" : "btn btn-sm btn-dark"
-          }
-          style={{ boxShadow: "none" }}
-        >
-          Dashboard
-        </NavLink>
-      </nav>
-      <Outlet />
+              style={{ margin: "0 5px", boxShadow: "none" }}
+              to="/stories"
+            >
+              Stories
+            </NavLink>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "btn btn-dark btn-sm disabled"
+                  : "btn btn-sm btn-dark"
+              }
+              style={{ boxShadow: "none" }}
+            >
+              Dashboard
+            </NavLink>
+          </nav>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

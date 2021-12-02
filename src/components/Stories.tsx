@@ -133,7 +133,7 @@ export const Stories = ({ user }) => {
   // DEBUGGING
 
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div>
       <div className="content-container" style={{ padding: "5px" }}>
         {/* USER INPUT */}
         <div className="forms" style={{ display: "flex" }}>

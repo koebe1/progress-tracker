@@ -6,9 +6,24 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ user }) => {
   return (
-    <header style={{ borderBottom: "1px solid grey" }}>
-      <h1>Stories</h1>
-      <h3>Hi {user}</h3>
-    </header>
+    <div style={{ margin: "0 5px" }}>
+      <header
+        className=""
+        style={{
+          borderBottom: "1px solid lightgrey",
+          display: "flex",
+          justifyContent: "flex-start",
+        }}
+      >
+        <h1>
+          <span className="heading gradient">Stories</span>
+        </h1>
+      </header>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "35px" }}
+      >
+        <h3>Hi {user}!</h3>
+      </div>
+    </div>
   );
 };
