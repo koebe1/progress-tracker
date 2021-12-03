@@ -121,12 +121,6 @@ export const Stories = ({ stories, setStories }) => {
   };
 
   // SIDE EFFECTS
-  // get initial state from local storage
-  useEffect(() => {
-    const savedStories = JSON.parse(localStorage.getItem("stories"));
-    setStories(savedStories);
-  }, [setStories]);
-
   useEffect(() => {
     const savedSelectedStory = localStorage.getItem("selectedStory");
     setSelectedStory(savedSelectedStory);

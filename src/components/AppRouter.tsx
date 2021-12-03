@@ -13,13 +13,21 @@ const AppRouter = () => {
 
   // GET INIT STATE
   useEffect(() => {
-    if (localStorage.getItem("user") !== null) {
+    if (localStorage.getItem("user").length > 0) {
       // ! tells typescript value is not going to be null
       // ---> non null assertion
       const savedUser = localStorage.getItem("user");
       setUser(savedUser);
     }
   }, []);
+
+  // get initial state from local storage
+  useEffect(() => {
+    const savedStories = JSON.parse(localStorage.getItem("stories"));
+    if (Object.keys(savedStories).length > 0) {
+      setStories(savedStories);
+    }
+  }, [setStories]);
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
