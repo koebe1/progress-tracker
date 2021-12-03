@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Dashboard: React.FC = () => {
+export const Dashboard = ({ stories }) => {
   return (
     <div className="content-container">
-      <p>Dashboard works!</p>
+      <div className="tree flex-center">{JSON.stringify(stories)}</div>
     </div>
   );
 };

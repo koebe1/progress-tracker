@@ -4,9 +4,9 @@ import StoryList from "./StoryList";
 import StorySelect from "./StorySelect";
 import SubStoryList from "./SubStoryLis";
 
-export const Stories = ({ user }) => {
+export const Stories = ({ stories, setStories }) => {
   // STATE
-  const [stories, setStories] = useState({});
+
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
   const [selectedStory, setSelectedStory] = useState("");
@@ -125,7 +125,7 @@ export const Stories = ({ user }) => {
   useEffect(() => {
     const savedStories = JSON.parse(localStorage.getItem("stories"));
     setStories(savedStories);
-  }, []);
+  }, [setStories]);
 
   useEffect(() => {
     const savedSelectedStory = localStorage.getItem("selectedStory");

@@ -9,6 +9,7 @@ const AppRouter = () => {
   // STATE
   const [user, setUser] = useState("");
   const [userName, setUserName] = useState("");
+  const [stories, setStories] = useState({});
 
   // GET INIT STATE
   useEffect(() => {
@@ -48,9 +49,12 @@ const AppRouter = () => {
           }
         >
           {/* STORIES */}
-          <Route path="/stories" element={<Stories user={user} />} />
+          <Route
+            path="/stories"
+            element={<Stories stories={stories} setStories={setStories} />}
+          />
           {/* DASHBOARD */}
-          <Route path="/dashboard" element={<Dashboard user={user} />} />
+          <Route path="/dashboard" element={<Dashboard stories={stories} />} />
         </Route>
         <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
       </Routes>
