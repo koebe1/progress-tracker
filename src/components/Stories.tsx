@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputGroup from "./InputGroup";
 import StoryList from "./StoryList";
 import StorySelect from "./StorySelect";
+import SubStoryList from "./SubStoryLis";
 
 export const Stories = ({ user }) => {
   // STATE
@@ -180,6 +181,7 @@ export const Stories = ({ user }) => {
           className="story-container"
           style={{
             display: "flex",
+            alignItems: "center",
             marginTop: "20px",
           }}
         >
@@ -188,13 +190,13 @@ export const Stories = ({ user }) => {
               stories={stories}
               handleDeleteStory={handleDeleteStory}
               handleStoryCompletion={handleStoryCompletion}
-              subStory={false}
+              selectedStory={selectedStory}
             />
           </div>
 
           {/* SUBSTORIES */}
           <div style={{ width: "82.5%" }}>
-            <StoryList
+            <SubStoryList
               stories={
                 Object.keys(stories).length > 0 && selectedStory.length > 0
                   ? stories[selectedStory].subStories
@@ -202,7 +204,6 @@ export const Stories = ({ user }) => {
               }
               handleDeleteStory={handleDeleteSubStory}
               handleStoryCompletion={handleSubStoryCompletion}
-              subStory={true}
             />
           </div>
         </div>
