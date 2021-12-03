@@ -9,7 +9,7 @@ const StoryList = ({
   return (
     <ul style={{ width: "100%", padding: 0 }}>
       {stories
-        ? Object.keys(stories).map((story) => (
+        ? Object.keys(stories).filter(e => e === selectedStory).map((story) => (
             <div
               key={story}
               style={{
@@ -17,9 +17,8 @@ const StoryList = ({
                 alignItems: "center",
                 justifyContent: "space-between",
                 width: "100%",
-                height: "100%",
+                height: "40vh",
                 marginBottom: "20px",
-                border: "1px solid red",
               }}
             >
               <div

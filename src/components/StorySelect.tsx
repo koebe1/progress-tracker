@@ -70,7 +70,7 @@ const StorySelect = ({ stories, handleSelectedStory, selectedStory }) => {
   //   console.log(`options: ${JSON.stringify(options)}`);
 
   return (
-    <div style={{ marginRight: "5px" }}>
+    <div style={{ marginRight: "50px" }}>
       <Select
         styles={customStyles}
         value={

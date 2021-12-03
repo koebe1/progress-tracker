@@ -141,12 +141,18 @@ export const Stories = ({ user }) => {
     <div>
       <div className="content-container" style={{ padding: "10px" }}>
         {/* USER INPUT */}
+
         <div className="forms" style={{ display: "flex" }}>
           {/* STORY */}
+          <StorySelect
+            stories={stories}
+            selectedStory={selectedStory}
+            handleSelectedStory={setSelectedStory}
+          />
           <form
             onSubmit={handleStorySubmit}
             style={{
-              marginRight: "40px",
+              marginRight: "5px",
             }}
           >
             <InputGroup
@@ -163,12 +169,6 @@ export const Stories = ({ user }) => {
           >
             {/* render all stories as options for substories */}
 
-            <StorySelect
-              stories={stories}
-              selectedStory={selectedStory}
-              handleSelectedStory={setSelectedStory}
-            />
-
             <InputGroup
               storyInput={subStoryInput}
               handleStoryInput={handleSubStoryInput}
@@ -183,6 +183,7 @@ export const Stories = ({ user }) => {
             display: "flex",
             alignItems: "center",
             marginTop: "20px",
+            minHeight: "50vh",
           }}
         >
           <div style={{ width: "31.5%" }}>
