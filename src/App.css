@@ -12,10 +12,14 @@ body {
   font-size: 14px;
   height: "100%";
 }
+:root {
+  --main-color: #333;
+}
 
 .heading {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
+  color: var(--main-color);
 }
 
 /* GENERIC CLASSES */
@@ -39,7 +43,10 @@ body {
 }
 
 /* NAV BUTTONS */
-
+.nav-button:hover {
+  background-color: #555;
+  border-color: #555;
+}
 .content-container {
   min-height: 60vh;
   min-width: 600px;

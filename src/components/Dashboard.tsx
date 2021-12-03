@@ -11,6 +11,7 @@ export const Dashboard = ({ stories }) => {
           style={{
             fontSize: "30px",
             color: "#d3d3d3",
+            cursor: "pointer",
             transform: "rotate(180deg)",
             border: "1px solid #d3d3d3",
             borderRadius: "4px",
@@ -20,6 +21,7 @@ export const Dashboard = ({ stories }) => {
         <GiProgression
           style={{
             fontSize: "30px",
+            cursor: "pointer",
             color: "#777",
             border: "1px solid #d3d3d3",
             borderRadius: "4px",
