@@ -70,23 +70,6 @@ const TreeChart = ({ stories }) => {
     // enrich hierarchical data with coordinates
     treeLayout(root);
 
-    console.warn("descendants", root.descendants());
-    console.warn("links", root.links());
-
-    // nodes
-    svg
-      .selectAll(".node")
-      .data(root.descendants())
-      .join((enter) => enter.append("circle").attr("opacity", 0))
-      .attr("class", "node")
-      .attr("cx", (node) => node.y)
-      .attr("cy", (node) => node.x)
-      .attr("r", 4)
-      .transition()
-      .duration(500)
-      .delay((node) => node.depth * 300)
-      .attr("opacity", 1);
-
     // links
     const enteringAndUpdatingLinks = svg
       .selectAll(".link")
@@ -98,9 +81,9 @@ const TreeChart = ({ stories }) => {
         const length = this.getTotalLength();
         return `${length} ${length}`;
       })
-      .attr("stroke", "black")
+      .attr("stroke", "#000")
       .attr("fill", "none")
-      .attr("opacity", 1);
+      .attr("opacity", 0.1);
 
     if (data !== previouslyRenderedData) {
       enteringAndUpdatingLinks
@@ -109,7 +92,7 @@ const TreeChart = ({ stories }) => {
         })
         .transition()
         .duration(500)
-        .delay((link) => link.source.depth * 500)
+        .delay((link) => link.source.depth * 700)
         .attr("stroke-dashoffset", 0);
     }
 
@@ -126,8 +109,23 @@ const TreeChart = ({ stories }) => {
       .text((node) => node.data.name)
       .transition()
       .duration(500)
-      .delay((node) => node.depth * 300)
+      .delay((node) => node.depth * 500)
       .attr("opacity", 1);
+
+    // nodes
+    svg
+      .selectAll(".node")
+      .data(root.descendants())
+      .join((enter) => enter.append("circle").attr("opacity", 0))
+      .attr("class", "node")
+      .attr("cx", (node) => node.y)
+      .attr("cy", (node) => node.x)
+      .attr("r", 4)
+      .transition()
+      .duration(500)
+      .delay((node) => node.depth * 500)
+      .attr("opacity", 0.7)
+      .attr("fill", "#000");
   }, [data, dimensions, previouslyRenderedData]);
 
   return (
