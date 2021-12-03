@@ -31,15 +31,14 @@ export const Stories = ({ user }) => {
       }));
       // empty input field
       setStoryInput("");
+      // set selectedStory if no story is selected
+      if (selectedStory.length === 0) {
+        setSelectedStory(storyInput);
+      }
     }
   };
 
   const handleDeleteStory = (e) => {
-    // if selected story gets deleted
-    // -> set selected to empty value
-    if (e.target.name === selectedStory) {
-      setSelectedStory("");
-    }
     // delete story property of the clicked list item
     setStories((prev) => {
       delete prev[e.target.name];
@@ -47,6 +46,12 @@ export const Stories = ({ user }) => {
         ...prev,
       };
     });
+    // if selected story gets deleted
+    // -> set selected to empty value
+
+    if (e.target.name === selectedStory) {
+      setSelectedStory("");
+    }
   };
 
   const handleStoryCompletion = (story) => {
@@ -134,8 +139,6 @@ export const Stories = ({ user }) => {
   useEffect(() => {
     localStorage.setItem("stories", JSON.stringify(stories));
   }, [stories]);
-
-  // DEBUGGING
 
   return (
     <div>
