@@ -132,7 +132,8 @@ const TreeChart = ({ stories }) => {
     <div
       ref={wrapperRef}
       style={{
-        height: "50vh",
+        height: "60vh",
+        marginBottom: "20px",
       }}
     >
       <svg style={{ overflow: "visible" }} ref={svgRef}></svg>

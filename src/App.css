@@ -48,8 +48,8 @@ body {
   border-color: #555;
 }
 .content-container {
-  min-height: 60vh;
-  min-width: 600px;
+  min-height: 65vh;
+  min-width: 650px;
   max-width: 800px;
   margin: 10px 0 20px 0;
   background-color: #fff;
