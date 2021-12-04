@@ -46,7 +46,7 @@ export const Dashboard = () => {
           />
         </NavLink>
       </nav>
-      <div className="tree flex-center">
+      <div className="flex-center">
         <Outlet />
       </div>
     </div>
