@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import App from "../App";
 
 import { Dashboard } from "./Dashboard";
+import Overview from "./Overview";
+import Progress from "./Progress";
 import { Stories } from "./Stories";
 
 const AppRouter = () => {
@@ -62,10 +64,16 @@ const AppRouter = () => {
             element={<Stories stories={stories} setStories={setStories} />}
           />
           {/* DASHBOARD */}
-          <Route
-            path="/dashboard/overview"
-            element={<Dashboard stories={stories} />}
-          />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route
+              path="/dashboard/overview"
+              element={<Overview stories={stories} />}
+            />
+            <Route
+              path="/dashboard/progress"
+              element={<Progress stories={stories} />}
+            />
+          </Route>
         </Route>
         <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
       </Routes>

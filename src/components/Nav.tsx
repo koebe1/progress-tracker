@@ -22,7 +22,7 @@ const Nav = () => {
         Stories
       </NavLink>
       <NavLink
-        to="/dashboard/overview"
+        to="/dashboard"
         className={({ isActive }) =>
           isActive
             ? "btn btn-outline-secondary disabled nav-button"
