@@ -62,7 +62,10 @@ const AppRouter = () => {
             element={<Stories stories={stories} setStories={setStories} />}
           />
           {/* DASHBOARD */}
-          <Route path="/dashboard" element={<Dashboard stories={stories} />} />
+          <Route
+            path="/dashboard/overview"
+            element={<Dashboard stories={stories} />}
+          />
         </Route>
         <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
       </Routes>

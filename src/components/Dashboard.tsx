@@ -28,7 +28,7 @@ export const Dashboard = ({ stories }) => {
           }}
         />
       </nav>
-      <div className="tree flex-center" style={{ marginRight: "20px" }}>
+      <div className="tree flex-center">
         <TreeChart stories={stories} />
       </div>
     </div>

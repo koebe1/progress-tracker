@@ -3,11 +3,11 @@ import { NavLink, Outlet } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header";
 import { UserNameForm } from "./components/UserNameForm";
+import Nav from "./components/Nav";
 
 const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
   return (
     <div>
-      <Header user={user} />
       {/* show name form if there is no user yet */}
       {!user ? (
         <UserNameForm
@@ -16,6 +16,7 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
           userName={userName}
         />
       ) : null}
+      <Header user={user} />
       <div
         style={{
           display: "flex",
@@ -24,36 +25,7 @@ const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
         }}
       >
         <div>
-          <nav style={{ marginTop: "5px", position: "relative", right: "5px" }}>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "btn btn-outline-secondary  disabled nav-button"
-                  : "btn  btn-outline-dark nav-button"
-              }
-              // className="btn btn-secondary"
-
-              style={{
-                margin: "0 5px",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-              to="/stories"
-            >
-              Stories
-            </NavLink>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? "btn btn-outline-secondary disabled nav-button"
-                  : "btn  btn-outline-dark nav-button"
-              }
-              style={{ boxShadow: "none", borderRadius: "4px" }}
-            >
-              Dashboard
-            </NavLink>
-          </nav>
+          <Nav />
           <Outlet />
         </div>
       </div>
