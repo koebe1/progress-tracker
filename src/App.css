@@ -105,3 +105,12 @@ body {
   cursor: pointer;
   list-style: none;
 }
+
+/* DASHBOARD */
+/* PROGRESS */
+
+.progress-bar {
+  background: #d3d3d3;
+  height: 15px;
+  margin-right: 30px;
+}

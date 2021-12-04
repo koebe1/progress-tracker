@@ -58,7 +58,7 @@ const StorySelect = ({ stories, handleSelectedStory, selectedStory }) => {
   useEffect(() => {
     if (selectedStory) {
       if (!options.some((obj) => selectedStory === obj.value)) {
-        handleSelectedStory(null);
+        handleSelectedStory("");
         localStorage.removeItem("selectedStory");
       }
     }
