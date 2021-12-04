@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const Progress = ({ stories }) => {
+  const progressRef: any = useRef();
+
+  const [dimensions, setDimensions] = useState({ width: 0 });
+
+  useLayoutEffect(() => {
+    if (progressRef.current) {
+      setDimensions({
+        width: progressRef.current.offsetWidth,
+      });
+    }
+  }, []);
+
   return (
-    <div style={{ width: "100%" }}>
+    <div ref={progressRef} style={{ width: "100%" }}>
       <ul
         style={{
           width: "100%",
@@ -55,10 +68,16 @@ const Progress = ({ stories }) => {
                     width: "78%",
                   }}
                 >
-                  <div
+                  <motion.div
+                    style={{ width: "0%" }}
                     className="progress-bar"
-                    style={{ width: `${Math.round(progress)}%` }}
-                  ></div>
+                    // ref is 100% of the container divs width
+                    // progress bar gets calculated on the basis of that
+                    animate={{
+                      width: (dimensions.width / 160) * Math.round(progress),
+                    }}
+                    transition={{ duration: 0.5 }}
+                  ></motion.div>
                   <span>{Math.round(progress)}%</span>
                 </div>
               </div>
