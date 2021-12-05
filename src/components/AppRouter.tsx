@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
 
 import { Dashboard } from "./Dashboard";
-import Overview from "./Overview";
-import Progress from "./Progress";
 import { Stories } from "./Stories";
 
 const AppRouter = () => {
@@ -43,40 +41,45 @@ const AppRouter = () => {
     localStorage.setItem("user", userName);
   };
 
+  const Overview = lazy(() => import("./Overview"));
+  const Progress = lazy(() => import("./Progress"));
+
   return (
     <>
-      <Routes>
-        {/* APP */}
-        <Route
-          path="/"
-          element={
-            <App
-              user={user}
-              userName={userName}
-              handleNameChange={handleNameChange}
-              handleNameSubmit={handleNameSubmit}
-            />
-          }
-        >
-          {/* STORIES */}
+      <Suspense fallback={<h2>loading...</h2>}>
+        <Routes>
+          {/* APP */}
           <Route
-            path="/stories"
-            element={<Stories stories={stories} setStories={setStories} />}
-          />
-          {/* DASHBOARD */}
-          <Route path="/dashboard" element={<Dashboard />}>
+            path="/"
+            element={
+              <App
+                user={user}
+                userName={userName}
+                handleNameChange={handleNameChange}
+                handleNameSubmit={handleNameSubmit}
+              />
+            }
+          >
+            {/* STORIES */}
             <Route
-              path="/dashboard/overview"
-              element={<Overview stories={stories} />}
+              path="/stories"
+              element={<Stories stories={stories} setStories={setStories} />}
             />
-            <Route
-              path="/dashboard/progress"
-              element={<Progress stories={stories} />}
-            />
+            {/* DASHBOARD */}
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route
+                path="/dashboard/overview"
+                element={<Overview stories={stories} />}
+              />
+              <Route
+                path="/dashboard/progress"
+                element={<Progress stories={stories} />}
+              />
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
-      </Routes>
+          <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
+        </Routes>
+      </Suspense>
     </>
   );
 };
