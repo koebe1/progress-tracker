@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
 import Overview from "./Overview";
@@ -8,26 +8,21 @@ import { Stories } from "./Stories";
 
 const AppRouter = () => {
   // STATE
-  const [user, setUser] = useState("");
+  const savedUser = localStorage.getItem("user");
+  const [user, setUser] = useState(
+    savedUser && savedUser.length > 0 ? savedUser : ""
+  );
   const [userName, setUserName] = useState("");
-  const [stories, setStories] = useState({});
+  // get init story state from local storage or set it to an empty object
+  const savedStories = localStorage.getItem("stories")
+    ? JSON.parse(localStorage.getItem("stories"))
+    : null;
 
-  // GET INIT STATE
-  // get storie state from local storage
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(savedUser);
-    }
-  }, []);
+  const [stories, setStories] = useState(
+    savedStories && Object.keys(savedStories).length > 0 ? savedStories : {}
+  );
 
-  // get initial state from local storage
-  useEffect(() => {
-    const savedStories = JSON.parse(localStorage.getItem("stories"));
-    if (savedStories && Object.keys(savedStories).length > 0) {
-      setStories(savedStories);
-    }
-  }, []);
+
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +36,6 @@ const AppRouter = () => {
     localStorage.setItem("user", userName);
   };
 
-  console.log(JSON.parse(localStorage.getItem("stories")));
   return (
     <>
       <Routes>
