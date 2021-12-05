@@ -5,11 +5,21 @@ import StorySelect from "./StorySelect";
 import SubStoryList from "./SubStoryLis";
 
 export const Stories = ({ stories, setStories }) => {
+  
   // STATE
-
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
-  const [selectedStory, setSelectedStory] = useState("");
+
+  // get init selectedStory state
+  const savedSelectedStory = localStorage.getItem("selectedStory");
+
+  const [selectedStory, setSelectedStory] = useState(
+    savedSelectedStory && savedSelectedStory.length > 0
+      ? savedSelectedStory
+      : ""
+  );
+
+
 
   // EVENT HANDLERS
   // STORY
@@ -121,14 +131,6 @@ export const Stories = ({ stories, setStories }) => {
   };
 
   // SIDE EFFECTS
-  // get init selectedStory
-  useEffect(() => {
-    const savedSelectedStory = localStorage.getItem("selectedStory");
-    if (savedSelectedStory && savedSelectedStory.length > 0) {
-      setSelectedStory(savedSelectedStory);
-    }
-  }, []);
-
   // keep local storage and selectedStory in sync
   useEffect(() => {
     localStorage.setItem("selectedStory", selectedStory);

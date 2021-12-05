@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
 import Overview from "./Overview";
@@ -13,6 +13,7 @@ const AppRouter = () => {
     savedUser && savedUser.length > 0 ? savedUser : ""
   );
   const [userName, setUserName] = useState("");
+  
   // get init story state from local storage or set it to an empty object
   const savedStories = localStorage.getItem("stories")
     ? JSON.parse(localStorage.getItem("stories"))
@@ -21,8 +22,6 @@ const AppRouter = () => {
   const [stories, setStories] = useState(
     savedStories && Object.keys(savedStories).length > 0 ? savedStories : {}
   );
-
-
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
