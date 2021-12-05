@@ -121,15 +121,20 @@ export const Stories = ({ stories, setStories }) => {
   };
 
   // SIDE EFFECTS
+  // get init selectedStory
   useEffect(() => {
     const savedSelectedStory = localStorage.getItem("selectedStory");
-    setSelectedStory(savedSelectedStory);
+    if (savedSelectedStory && savedSelectedStory.length > 0) {
+      setSelectedStory(savedSelectedStory);
+    }
   }, []);
 
+  // keep local storage and selectedStory in sync
   useEffect(() => {
     localStorage.setItem("selectedStory", selectedStory);
-  }, [stories, selectedStory]);
-  // save stories to local storage
+  }, [selectedStory]);
+
+  // keep local storage and stories in sync
   useEffect(() => {
     localStorage.setItem("stories", JSON.stringify(stories));
   }, [stories]);

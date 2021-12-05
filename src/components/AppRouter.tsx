@@ -1,7 +1,8 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
-
+import Overview from "./Overview";
+import Progress from "./Progress";
 import { Dashboard } from "./Dashboard";
 import { Stories } from "./Stories";
 
@@ -12,11 +13,10 @@ const AppRouter = () => {
   const [stories, setStories] = useState({});
 
   // GET INIT STATE
+  // get storie state from local storage
   useEffect(() => {
-    if (localStorage.getItem("user").length > 0) {
-      // ! tells typescript value is not going to be null
-      // ---> non null assertion
-      const savedUser = localStorage.getItem("user");
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
       setUser(savedUser);
     }
   }, []);
@@ -24,10 +24,10 @@ const AppRouter = () => {
   // get initial state from local storage
   useEffect(() => {
     const savedStories = JSON.parse(localStorage.getItem("stories"));
-    if (Object.keys(savedStories).length > 0) {
+    if (savedStories && Object.keys(savedStories).length > 0) {
       setStories(savedStories);
     }
-  }, [setStories]);
+  }, []);
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
@@ -41,45 +41,41 @@ const AppRouter = () => {
     localStorage.setItem("user", userName);
   };
 
-  const Overview = lazy(() => import("./Overview"));
-  const Progress = lazy(() => import("./Progress"));
-
+  console.log(JSON.parse(localStorage.getItem("stories")));
   return (
     <>
-      <Suspense fallback={<h2>loading...</h2>}>
-        <Routes>
-          {/* APP */}
-          <Route
-            path="/"
-            element={
-              <App
-                user={user}
-                userName={userName}
-                handleNameChange={handleNameChange}
-                handleNameSubmit={handleNameSubmit}
-              />
-            }
-          >
-            {/* STORIES */}
-            <Route
-              path="/stories"
-              element={<Stories stories={stories} setStories={setStories} />}
+      <Routes>
+        {/* APP */}
+        <Route
+          path="/"
+          element={
+            <App
+              user={user}
+              userName={userName}
+              handleNameChange={handleNameChange}
+              handleNameSubmit={handleNameSubmit}
             />
-            {/* DASHBOARD */}
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route
-                path="/dashboard/overview"
-                element={<Overview stories={stories} />}
-              />
-              <Route
-                path="/dashboard/progress"
-                element={<Progress stories={stories} />}
-              />
-            </Route>
+          }
+        >
+          {/* STORIES */}
+          <Route
+            path="/stories"
+            element={<Stories stories={stories} setStories={setStories} />}
+          />
+          {/* DASHBOARD */}
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route
+              path="/dashboard/overview"
+              element={<Overview stories={stories} />}
+            />
+            <Route
+              path="/dashboard/progress"
+              element={<Progress stories={stories} />}
+            />
           </Route>
-          <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
-        </Routes>
-      </Suspense>
+        </Route>
+        <Route path="*" element={<h1>404 ¯\_(ツ)_/¯ </h1>} />
+      </Routes>
     </>
   );
 };
