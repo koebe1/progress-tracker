@@ -5,23 +5,18 @@ import Overview from "./Overview";
 import Progress from "./Progress";
 import { Dashboard } from "./Dashboard";
 import { Stories } from "./Stories";
+import { useLocalStorage } from "./utils/useLocalsStorage";
 
 const AppRouter = () => {
   // STATE
-  const savedUser = localStorage.getItem("user");
-  const [user, setUser] = useState(
-    savedUser && savedUser.length > 0 ? savedUser : ""
+  // custom hook handles saving and retrieving from local storage
+  const [user, setUser] = useLocalStorage("user", "");
+  const [stories, setStories] = useLocalStorage("stories", {});
+  const [selectedStory, setSelectedStory] = useLocalStorage(
+    "selectedStory",
+    ""
   );
   const [userName, setUserName] = useState("");
-  
-  // get init story state from local storage or set it to an empty object
-  const savedStories = localStorage.getItem("stories")
-    ? JSON.parse(localStorage.getItem("stories"))
-    : null;
-
-  const [stories, setStories] = useState(
-    savedStories && Object.keys(savedStories).length > 0 ? savedStories : {}
-  );
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
@@ -32,7 +27,6 @@ const AppRouter = () => {
   const handleNameSubmit = (event) => {
     event.preventDefault();
     setUser(userName);
-    localStorage.setItem("user", userName);
   };
 
   return (
@@ -53,7 +47,14 @@ const AppRouter = () => {
           {/* STORIES */}
           <Route
             path="/stories"
-            element={<Stories stories={stories} setStories={setStories} />}
+            element={
+              <Stories
+                stories={stories}
+                setStories={setStories}
+                selectedStory={selectedStory}
+                setSelectedStory={setSelectedStory}
+              />
+            }
           />
           {/* DASHBOARD */}
           <Route path="/dashboard" element={<Dashboard />}>

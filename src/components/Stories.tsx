@@ -4,22 +4,16 @@ import StoryList from "./StoryList";
 import StorySelect from "./StorySelect";
 import SubStoryList from "./SubStoryLis";
 
-export const Stories = ({ stories, setStories }) => {
-  
+export const Stories = ({
+  stories,
+  setStories,
+  selectedStory,
+  setSelectedStory,
+}) => {
   // STATE
+
   const [subStoryInput, setSubStoryInput] = useState("");
   const [storyInput, setStoryInput] = useState("");
-
-  // get init selectedStory state
-  const savedSelectedStory = localStorage.getItem("selectedStory");
-
-  const [selectedStory, setSelectedStory] = useState(
-    savedSelectedStory && savedSelectedStory.length > 0
-      ? savedSelectedStory
-      : ""
-  );
-
-
 
   // EVENT HANDLERS
   // STORY
