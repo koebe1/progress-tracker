@@ -49,7 +49,7 @@ body {
 }
 .content-container {
   min-height: 65vh;
-  min-width: 650px;
+  min-width: 670px;
   max-width: 800px;
   margin: 10px 0 20px 0;
   background-color: #fff;
@@ -112,5 +112,4 @@ body {
 .progress-bar {
   background: #d3d3d3;
   height: 15px;
-  margin-right: 30px;
 }

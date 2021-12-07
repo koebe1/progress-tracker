@@ -21,6 +21,7 @@ const Progress = ({ stories }) => {
           width: "100%",
           height: "50vh",
           margin: "0",
+          padding: "0",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -38,7 +39,6 @@ const Progress = ({ stories }) => {
             // loop through substorys
             for (let subStory of Object.keys(stories[story].subStories)) {
               subStoryCounter++;
-              console.log(subStory);
 
               if (stories[story].subStories[subStory].done) {
                 doneCounter++;
@@ -46,7 +46,6 @@ const Progress = ({ stories }) => {
               progress = (doneCounter / subStoryCounter) * 100;
             }
           }
-          console.log(progress);
           return (
             <li key={story} style={{ listStyle: "none", padding: "2vh 0" }}>
               {" "}
@@ -55,17 +54,27 @@ const Progress = ({ stories }) => {
                   display: "flex",
                   justifyContent: "flex-start",
                   alignItems: "center",
+                  // border: "1px solid red",
+                  margin: "0 35px",
                 }}
               >
-                <span style={{ marginRight: "10px", width: "80px" }}>
+                <span
+                  style={{
+                    marginRight: "0px",
+                    width: "130px",
+                    wordWrap: "break-word",
+                  }}
+                >
                   {story}
                 </span>
                 <div
                   className="progress-bar-container"
                   style={{
+                    width: "100%",
                     display: "flex",
                     alignItems: "center",
-                    width: "78%",
+                    justifyContent: "space-between",
+                    // border: "1px solid blue",
                   }}
                 >
                   <motion.div

@@ -9,6 +9,7 @@ const InputGroup = ({ storyInput, handleStoryInput, placeholder }) => {
         className="input"
         type="text"
         placeholder={placeholder}
+        maxLength={20}
       />
       <div
         style={{
