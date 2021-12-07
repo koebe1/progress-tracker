@@ -133,6 +133,7 @@ const TreeChart = ({ stories }) => {
       ref={wrapperRef}
       style={{
         height: "60vh",
+        width: "clamp(400px, 40vw, 550px)",
         marginBottom: "20px",
       }}
     >
