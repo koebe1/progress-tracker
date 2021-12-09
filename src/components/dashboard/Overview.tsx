@@ -1,7 +1,8 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import TreeChart from "./TreeChart";
+import { Stories } from "../../types";
 
-const Overview = ({stories}) => {
+const Overview = ({ stories }: Stories) => {
   return (
     <>
       <TreeChart stories={stories} />

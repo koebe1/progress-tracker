@@ -10,8 +10,6 @@ const Nav = () => {
             ? "btn btn-outline-secondary  disabled nav-button"
             : "btn  btn-outline-dark nav-button"
         }
-        // className="btn btn-secondary"
-
         style={{
           margin: "0 5px",
           boxShadow: "none",

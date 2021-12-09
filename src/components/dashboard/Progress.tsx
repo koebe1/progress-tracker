@@ -1,5 +1,6 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Stories } from "../../types";
 
 const Progress = ({ stories }) => {
   const progressRef: any = useRef();
