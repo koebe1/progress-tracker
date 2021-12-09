@@ -1,23 +1,23 @@
 // STORY TYPE
-interface SubStory {
+interface SubStoryType {
   done: boolean;
 }
 
-export interface SubStories {
-  [k: string]: SubStory;
+export interface SubStoriesType {
+  [k: string]: SubStoryType;
 }
 
-interface Story {
+interface StoryType {
   done: boolean;
-  subStories: SubStories;
+  subStories: SubStoriesType;
 }
 
-export interface Stories {
-  [k: string]: Story;
+export interface StoriesType {
+  [k: string]: StoryType;
 }
 
 export interface StoriesProps {
-  stories: Stories;
+  stories: StoriesType;
 }
 
 // STORY SHAPE
