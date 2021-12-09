@@ -1,9 +1,9 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Stories } from "../../types";
+import { StoriesProps } from "../../types";
 
-const Progress = ({ stories }) => {
-  const progressRef: any = useRef();
+const Progress = ({ stories }: StoriesProps) => {
+  const progressRef = useRef<HTMLDivElement>(null);
 
   const [dimensions, setDimensions] = useState({ width: 0 });
 
