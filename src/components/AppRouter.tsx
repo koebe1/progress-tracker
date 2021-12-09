@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import App from "../App";
 import Overview from "./dashboard/Overview";
 import Progress from "./dashboard/Progress";
-import { Dashboard } from "./Dashboard";
-import { Stories } from "./Stories";
+import { Dashboard } from "./dashboard/Dashboard";
+import { Stories } from "./stories/Stories";
 import { useLocalStorage } from "./utils/useLocalsStorage";
 
 const AppRouter = () => {

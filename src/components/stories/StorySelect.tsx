@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import Select from "react-select";
+import { StoriesProps } from "../../types";
 
-const customStyles = {
-  control: (provided, state) => ({
+const customStyles: any = {
+  control: (provided: CSSProperties) => ({
     ...provided,
     minHeight: "30px",
     minWidth: "150px",
@@ -15,41 +16,51 @@ const customStyles = {
     },
   }),
 
-  options: (provided) => ({
+  options: () => ({
     height: "30px",
     minHeight: "30px",
   }),
 
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided: CSSProperties) => ({
     ...provided,
     height: "30px",
     padding: "0 6px",
   }),
 
-  input: (provided, state) => ({
+  input: (provided: CSSProperties) => ({
     ...provided,
     margin: "0px",
   }),
 
-  indicatorsContainer: (provided, state) => ({
+  indicatorsContainer: (provided: CSSProperties) => ({
     ...provided,
     height: "30px",
   }),
-  drowdownIndicator: (provided, state) => ({
+  drowdownIndicator: (provided: CSSProperties) => ({
     ...provided,
     backgroundColor: "d3d3d3",
   }),
 };
 
-const StorySelect = ({ stories, handleSelectedStory, selectedStory }) => {
+interface StorySelectProps {
+  stories: StoriesProps;
+  handleSelectedStory: React.Dispatch<React.SetStateAction<string>>;
+  selectedStory: string;
+}
+
+const StorySelect = ({
+  stories,
+  handleSelectedStory,
+  selectedStory,
+}: StorySelectProps) => {
   // Mapping props
   const nStories = stories ? Object.keys(stories) : [];
   // eslint-disable-next-line
-  const options = [];
+  const options: { value: string; label: string }[] = [];
   nStories.map((story) => options.push({ value: story, label: story }));
 
   // EVENT HANDLER
-  const handleSelectChange = (selectedOption) => {
+  const handleSelectChange = (selectedOption: any) => {
     handleSelectedStory(selectedOption.value);
   };
 
