@@ -1,5 +1,5 @@
 import React from "react";
-import TreeChart from "./treeChart/TreeChart";
+import TreeChart from "./TreeChart";
 
 const Overview = ({stories}) => {
   return (

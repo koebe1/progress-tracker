@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
-import Overview from "./Overview";
-import Progress from "./Progress";
+import Overview from "./dashboard/Overview";
+import Progress from "./dashboard/Progress";
 import { Dashboard } from "./Dashboard";
 import { Stories } from "./Stories";
 import { useLocalStorage } from "./utils/useLocalsStorage";

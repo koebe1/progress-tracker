@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import InputGroup from "./InputGroup";
-import StoryList from "./StoryList";
-import StorySelect from "./StorySelect";
-import SubStoryList from "./SubStoryLis";
+import InputGroup from "./stories/InputGroup";
+import StoryList from "./stories/StoryList";
+import StorySelect from "./stories/StorySelect";
+import SubStoryList from "./stories/SubStoryLis";
 
 export const Stories = ({
   stories,

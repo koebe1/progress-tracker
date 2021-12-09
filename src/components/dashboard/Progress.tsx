@@ -87,7 +87,13 @@ const Progress = ({ stories }) => {
                     }}
                     transition={{ duration: 0.5 }}
                   ></motion.div>
-                  <span>{Math.round(progress)}%</span>
+                  <div
+                    style={{
+                      width: "38px ",
+                    }}
+                  >
+                    <span>{Math.round(progress)}%</span>
+                  </div>
                 </div>
               </div>
             </li>

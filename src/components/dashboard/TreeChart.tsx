@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { select, hierarchy, tree, linkHorizontal } from "d3";
-import useResizeObserver from "./useResizeObserver";
+import useResizeObserver from "../utils/useResizeObserver";
 
 // maps stories to data format for d3
 // -> data = {name: "name", children: {...}}
