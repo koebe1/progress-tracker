@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { StoriesType } from "../../types";
 import InputGroup from "./InputGroup";
 import StoryList from "./StoryList";
 import StorySelect from "./StorySelect";
 import SubStoryList from "./SubStoryLis";
+
+interface StoriesProps {
+  stories: StoriesType;
+  setStories: React.Dispatch<React.SetStateAction<{} | StoriesType>>;
+  selectedStory: string;
+  setSelectedStory: React.Dispatch<React.SetStateAction<string>>;
+}
 
 export const Stories = ({
   stories,
   setStories,
   selectedStory,
   setSelectedStory,
-}) => {
+}: StoriesProps) => {
   // STATE
 
   const [subStoryInput, setSubStoryInput] = useState("");
@@ -17,11 +25,11 @@ export const Stories = ({
 
   // EVENT HANDLERS
   // STORY
-  const handleStoryInput = (e) => {
+  const handleStoryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStoryInput(e.target.value);
   };
 
-  const handleStorySubmit = (e) => {
+  const handleStorySubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     // add new story with empty substory array to the story object
     if (storyInput !== "") {
@@ -42,10 +50,13 @@ export const Stories = ({
     }
   };
 
-  const handleDeleteStory = (e) => {
+  const handleDeleteStory = (e: React.MouseEvent<HTMLButtonElement>) => {
     // delete story property of the clicked list item
-    setStories((prev) => {
-      delete prev[e.target.name];
+    // --> read why the type cast on following line
+    //  --> https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
+    const target = e.target as HTMLButtonElement;
+    setStories((prev: StoriesType) => {
+      delete prev[target.name];
       return {
         ...prev,
       };
@@ -53,14 +64,14 @@ export const Stories = ({
     // if selected story gets deleted
     // -> set selected to empty value
 
-    if (e.target.name === selectedStory) {
+    if (target.name === selectedStory) {
       setSelectedStory("");
     }
   };
 
-  const handleStoryCompletion = (story) => {
+  const handleStoryCompletion = (story: string) => {
     // toggle done property
-    setStories((prev) => ({
+    setStories((prev: StoriesType) => ({
       ...prev,
       [story]: {
         done: !prev[story].done,
@@ -72,18 +83,18 @@ export const Stories = ({
   };
 
   // SUBSTORY
-  const handleSubStoryInput = (e) => {
+  const handleSubStoryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubStoryInput(e.target.value);
   };
 
-  const handleSubStorySubmit = (e) => {
+  const handleSubStorySubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (
       Object.keys(stories).length > 0 &&
       subStoryInput.length > 0 &&
       selectedStory.length > 0
     ) {
-      setStories((prev) => ({
+      setStories((prev: StoriesType) => ({
         ...prev,
         [selectedStory]: {
           done: false,
@@ -99,18 +110,19 @@ export const Stories = ({
     }
   };
 
-  const handleDeleteSubStory = (e) => {
-    setStories((prev) => {
-      delete prev[selectedStory].subStories[e.target.name];
+  const handleDeleteSubStory = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement;
+    setStories((prev: StoriesType) => {
+      delete prev[selectedStory].subStories[target.name];
       return {
         ...prev,
       };
     });
   };
 
-  const handleSubStoryCompletion = (subStory) => {
+  const handleSubStoryCompletion = (subStory: string) => {
     // toggle done property on substory
-    setStories((prev) => ({
+    setStories((prev: StoriesType) => ({
       ...prev,
       [selectedStory]: {
         ...prev[selectedStory],
@@ -199,7 +211,7 @@ export const Stories = ({
               stories={
                 Object.keys(stories).length > 0 && selectedStory.length > 0
                   ? stories[selectedStory].subStories
-                  : []
+                  : {}
               }
               handleDeleteStory={handleDeleteSubStory}
               handleStoryCompletion={handleSubStoryCompletion}

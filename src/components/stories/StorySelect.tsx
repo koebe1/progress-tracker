@@ -1,6 +1,6 @@
 import React, { CSSProperties, useEffect } from "react";
 import Select from "react-select";
-import { StoriesProps } from "../../types";
+import { StoriesType } from "../../types";
 
 const customStyles: any = {
   control: (provided: CSSProperties) => ({
@@ -43,7 +43,7 @@ const customStyles: any = {
 };
 
 interface StorySelectProps {
-  stories: StoriesProps;
+  stories: StoriesType;
   handleSelectedStory: React.Dispatch<React.SetStateAction<string>>;
   selectedStory: string;
 }

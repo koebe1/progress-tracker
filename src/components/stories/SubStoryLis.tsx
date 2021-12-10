@@ -1,8 +1,8 @@
 import React from "react";
-import { StoriesType } from "../../types";
+import {  SubStoriesType } from "../../types";
 
 interface SubStoryListProps {
-  stories: StoriesType;
+  stories: SubStoriesType;
   handleStoryCompletion: (story: string) => void;
   handleDeleteStory: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
