@@ -1,10 +1,17 @@
 import React from "react";
+import { StoriesType } from "../../types";
+
+interface SubStoryListProps {
+  stories: StoriesType;
+  handleStoryCompletion: (story: string) => void;
+  handleDeleteStory: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
 const SubStoryList = ({
   stories,
   handleStoryCompletion,
   handleDeleteStory,
-}) => {
+}: SubStoryListProps) => {
   return (
     <ul style={{ width: "100%", padding: 0 }}>
       {stories
