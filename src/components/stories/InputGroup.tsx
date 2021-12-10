@@ -1,6 +1,12 @@
 import React from "react";
 
-const InputGroup = ({ storyInput, handleStoryInput, placeholder }) => {
+interface InputGroupProps {
+  storyInput: string;
+  handleStoryInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+}
+
+const InputGroup = ({ storyInput, handleStoryInput, placeholder }: InputGroupProps) => {
   return (
     <div className="input-group flex-center">
       <input
