@@ -1,11 +1,23 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header";
 import { UserNameForm } from "./components/UserNameForm";
 import Nav from "./components/Nav";
 
-const App = ({ user, userName, handleNameChange, handleNameSubmit }) => {
+interface AppProps {
+  user: string;
+  userName: string;
+  handleNameChange: (e: SyntheticEvent) => void;
+  handleNameSubmit: (e: SyntheticEvent) => void;
+}
+
+const App = ({
+  user,
+  userName,
+  handleNameChange,
+  handleNameSubmit,
+}: AppProps) => {
   return (
     <div>
       {/* show name form if there is no user yet */}

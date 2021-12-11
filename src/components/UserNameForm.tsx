@@ -1,10 +1,10 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 
 // NEEDS REFACTORING
 interface UserNameFormProps {
-  handleNameSubmit: any;
-  handleNameChange: any;
-  userName: any;
+  handleNameSubmit: (e: SyntheticEvent) => void;
+  handleNameChange: (e: SyntheticEvent) => void;
+  userName: string;
 }
 
 export const UserNameForm: React.FC<UserNameFormProps> = ({

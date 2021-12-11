@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
 import Overview from "./dashboard/Overview";
@@ -20,11 +20,12 @@ const AppRouter = () => {
 
   // EVENT HANDLERS
   // event: React.ChangeEvent<HTMLInputElement>
-  const handleNameChange = (event) => {
-    setUserName(event.target.value);
+  const handleNameChange = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement;
+    setUserName(target.value);
   };
   // event: React.FormEvent<HTMLButtonElement>
-  const handleNameSubmit = (event) => {
+  const handleNameSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     setUser(userName);
   };
